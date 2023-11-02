@@ -1,3 +1,5 @@
+# NOT WORKING YET
+
 # Python 3.12 RPM package for Enterprise Linux 7
 
 While Fedora Project has [rpms/python3.10](https://src.fedoraproject.org/rpms/python3.10)

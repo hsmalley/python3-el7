@@ -3,7 +3,7 @@
 %global pyshortver 311
 %global pyfullver %{pybasever}.6
 
-%global pip_version 23.0.1
+%global pip_version 23.2.1
 %global setuptools_version 65.5.0
 
 Name:           python%{pybasever}
@@ -99,7 +99,7 @@ Obsoletes:      %{name}-tools < %{version}-%{release}
 Provides:       %{name}-tkinter = %{version}-%{release}
 Provides:       %{name}-turtle = %{version}-%{release}
 
-%global __requires_exclude ^/usr/bin/python3.10|libpython3.10.*$
+%global __requires_exclude ^/usr/bin/python3.11|libpython3.11.*$
 
 %description
 Python %{pybasever} is an accessible, high-level, dynamically typed, interpreted
@@ -163,7 +163,7 @@ ls %{buildroot}%{_bindir}/python3-* > /dev/null && rm %{buildroot}%{_bindir}/pyt
 sed -i "s|#! */usr/local/bin/python|#! %{_bindir}/python%{pybasever}|" %{buildroot}%{_libdir}/python%{pybasever}/cgi.py
 
 # For some reason, the shebang of installed pip points to /usr/bin/python instead
-# of /usr/bin/python3.10. The script below is to change that.
+# of /usr/bin/python3.11. The script below is to change that.
 
 sed -i "s|%{_bindir}/python|%{_bindir}/python%{pybasever}|" %{buildroot}%{_bindir}/pip%{pybasever}
 
@@ -423,12 +423,12 @@ sed -i "s|%{_bindir}/python|%{_bindir}/python%{pybasever}|" %{buildroot}%{_bindi
 %{pylibdir}/config-%{pybasever}-%{platform_triplet}/*
 
 # Includes
-%dir %{_includedir}/python3.10
-%dir %{_includedir}/python3.10/internal
-%dir %{_includedir}/python3.10/cpython
-%{_includedir}/python3.10/*.h
-%{_includedir}/python3.10/internal/*.h
-%{_includedir}/python3.10/cpython/*.h
+%dir %{_includedir}/python3.11
+%dir %{_includedir}/python3.11/internal
+%dir %{_includedir}/python3.11/cpython
+%{_includedir}/python3.11/*.h
+%{_includedir}/python3.11/internal/*.h
+%{_includedir}/python3.11/cpython/*.h
 
 
 ####################################################################

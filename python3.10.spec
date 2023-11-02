@@ -107,8 +107,8 @@ programming language, designed with an emphasis on code readability.
 It includes an extensive standard library, and has a vast ecosystem of
 third-party libraries.
 
-This is an non-official Python %{pybasever} by Jacky Chen. Check 
-https://github.com/jacky9813/python3.10-el7 for RPM Spec source code.
+This is an non-official Python %{pybasever} by Hugh Smalley. Check 
+https://github.com/hsmalley/python3-el7 for RPM Spec source code.
 
 %prep
 %setup -q -n Python-%{pyfullver}
@@ -454,5 +454,6 @@ sed -i "s|%{_bindir}/python|%{_bindir}/python%{pybasever}|" %{buildroot}%{_bindi
 
 %changelog
 
+* Thr Nov 2 2023 Hugh Smalley
 * Tue Sep 19 2023 Jacky Chen <jacky9813@hotmail.com> - 3.10.13-1.jackychen
 - Initial Python 3.10 package.
