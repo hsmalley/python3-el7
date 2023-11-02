@@ -3,7 +3,9 @@ ARG PYFULLVER=3.12.0
 FROM centos:7 as rpm_builder
 
 RUN yum install -y epel-release rpmdevtools rpmlint && \
-    rpmdev-setuptree
+  rpmdev-setuptree
+
+RUN yum groupinstall -y "Development Tools"
 
 WORKDIR /root/rpmbuild
 
@@ -22,7 +24,7 @@ COPY ./el7-pkgconfig /el7-pkgconfig
 ENV PKG_CONFIG_PATH /el7-pkgconfig
 
 RUN rpmbuild -bs SPECS/python3.12.spec && \
-    rpmbuild --noclean -bb SPECS/python3.12.spec
+  rpmbuild --noclean -bb SPECS/python3.12.spec
 
 FROM scratch
 
