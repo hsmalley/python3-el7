@@ -1,4 +1,4 @@
-# Python 3.10 RPM package for Enterprise Linux 7
+# Python 3.12 RPM package for Enterprise Linux 7
 
 While Fedora Project has [rpms/python3.10](https://src.fedoraproject.org/rpms/python3.10)
 RPM source code, it doesn't work on EL7 as it uses multiple new directives that EL7 RPM
@@ -18,7 +18,7 @@ cannot support.
   EL7 one, as `libmpdec` Python 3.10 requires 2.5.0 or later while EL7 provides only
   2.4.2 in EPEL repo.
 * I'm not planned to unbundle things like python3.10-pip and python3.10-setuptools into
-  separated packages. It'll create too much hassle for me when all I want is to get 
+  separated packages. It'll create too much hassle for me when all I want is to get
   Python working only. (Maybe I'll try it when I'm free? Contribution are welcomed as
   well.)
 * The built RPM package will not create links for Idle in desktop.
@@ -28,11 +28,11 @@ cannot support.
 
 ```bash
 #!/bin/bash
-docker build -t python-rpm:3.10.13-1.el7.jackychen.$(uname -m) .
+docker build -t python-rpm:3.10.13-1.el7.hsmalley.$(uname -m) .
 [ -d build ] && rm -r build
 mkdir -p build
-docker save python-rpm:3.10.13-1.el7.jackychen.$(uname -m) -o build/3.10.13-1.el7.jackychen.$(uname -m).tar
-tar xvf build/3.10.13-1.el7.jackychen.$(uname -m).tar -C build
+docker save python-rpm:3.10.13-1.el7.hsmalley.$(uname -m) -o build/3.10.13-1.el7.hsmalley.$(uname -m).tar
+tar xvf build/3.10.13-1.el7.hsmalley.$(uname -m).tar -C build
 pushd $(find build/* -type d)
 tar xvf layer.tar -C ../
 popd
@@ -45,13 +45,13 @@ find build/* -type d | xargs -n 1 rm -r
 ```bash
 #!/bin/bash
 yum install -y epel-release rpmdevtools rpmlint
-yum-builddep -y python3.10.spec
+yum-builddep -y python3.12.spec
 rpmdev-setuptree
-spectool -g -S -R python3.10.spec
+spectool -g -S -R python3.12.spec
 
 export PKG_CONFIG_PATH=$(pwd)/el7-pkgconfig
-rpmbuild -bs python3.10.spec
-rpmbuild -bb python3.10.spec
+rpmbuild -bs python3.12.spec
+rpmbuild -bb python3.12.spec
 
 # The built RPM packages will exist in ~/rpmbuild/RPMS for binary RPMs and
 # ~/rpmbuild/SRPMS for source RPM.
@@ -62,5 +62,5 @@ rpmbuild -bb python3.10.spec
 ```bash
 #!/bin/bash
 yum install -y epel-release
-yum install -y ./python3.10-3.10.13-1.el7.jackychen.x86_64.rpm
+yum install -y ./python3.10-3.12.0-1.el7.hsmalley.x86_64.rpm
 ```
